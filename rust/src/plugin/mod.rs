@@ -19,7 +19,7 @@ macro_rules! declare_app_extend {
             let constructor: fn() -> $app = $constructor;
             let object = constructor();
             let boxed: Box<dyn $crate::Plugin> = Box::new(object);
-            let wrapper = $crate::PluginWrapper(boxed);
+            let wrapper = external_contracts::PluginWrapper(boxed);
             Box::into_raw(Box::new(wrapper))
         }
     };
