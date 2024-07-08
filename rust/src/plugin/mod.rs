@@ -1,4 +1,4 @@
-pub const PLUGIN_ENTRYPOINT_SYMBOL: &'static [u8; 27] = b"_lagrappe_plugin_entrypoint";
+pub const PLUGIN_ENTRYPOINT_SYMBOL: &[u8; 27] = b"_lagrappe_plugin_entrypoint";
 
 pub struct PluginContext {
     pub data_example: String,
@@ -9,18 +9,15 @@ pub trait Plugin: std::any::Any + Send + Sync {
     fn run(&self, ctx: &PluginContext);
 }
 
-pub struct PluginWrapper(pub Box<dyn Plugin>);
-
 #[macro_export]
 macro_rules! declare_app_extend {
     ($app:ty, $constructor:path) => {
         #[no_mangle]
-        pub extern "C" fn _lagrappe_plugin_entrypoint() -> *mut $crate::plugin::PluginWrapper {
+        pub extern "C" fn _lagrappe_plugin_entrypoint() -> *mut dyn $crate::plugin::Plugin {
             let constructor: fn() -> $app = $constructor;
             let object = constructor();
             let boxed: Box<dyn $crate::plugin::Plugin> = Box::new(object);
-            let wrapper = $crate::plugin::PluginWrapper(boxed);
-            Box::into_raw(Box::new(wrapper))
+            Box::into_raw(boxed)
         }
     };
 }
