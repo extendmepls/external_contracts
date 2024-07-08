@@ -1,4 +1,4 @@
-pub const PLUGIN_ENTRYPOINT_SYMBOL: &'static str = "_lagrappe_plugin_entrypoint";
+pub const PLUGIN_ENTRYPOINT_SYMBOL: &'static [u8; 27] = b"_lagrappe_plugin_entrypoint";
 
 pub struct PluginContext {
     pub data_example: String,
