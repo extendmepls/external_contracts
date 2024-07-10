@@ -5,6 +5,7 @@ pub enum LocalSettingsError {
     UnableToSerializeData,
 }
 
+#[derive(Debug)]
 pub struct PluginSettings {
     pub name: String,
     pub is_enabled: bool,
@@ -17,6 +18,7 @@ pub struct LocalSettings {
 }
 
 pub trait LocalSettingsProvider {
+    //TODO: investigate is it ok to use new method in trait, looks like a bad practice
     fn new() -> Result<Self, LocalSettingsError>
     where
         Self: Sized;
