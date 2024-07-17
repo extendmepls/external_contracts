@@ -1,5 +1,7 @@
 use std::path::PathBuf;
 
+use async_trait::async_trait;
+
 pub type OnChangedCallback = fn();
 
 #[derive(Debug)]
@@ -20,8 +22,9 @@ pub enum DataSourceError {
     IoError(std::io::Error),
 }
 
+#[async_trait]
 pub trait DataSource {
     fn watch(&self, on_changed: OnChangedCallback) -> Result<(), DataSourceError>;
     //TODO: return a mut/immutable reference to the data, to not stote it on the back and front on the same time
-    fn open(&self, path: PathBuf) -> &FileNode;
+    async fn open(&self, path: PathBuf) -> &FileNode;
 }
