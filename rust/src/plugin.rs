@@ -1,4 +1,4 @@
-use std::{collections::HashMap, error::Error, ffi::OsStr};
+use std::ffi::OsStr;
 
 pub const PLUGIN_ENTRYPOINT_SYMBOL: &[u8; 27] = b"_lagrappe_plugin_entrypoint";
 
@@ -25,11 +25,6 @@ macro_rules! declare_app_extend {
 }
 
 pub type OnChangedCallback = fn();
-
-pub trait DataSource {
-    fn watch(&self, on_changed: OnChangedCallback) -> Result<(), Box<dyn Error>>;
-    fn get_all_data(&self) -> Result<HashMap<String, Vec<u8>>, Box<dyn Error>>;
-}
 
 pub trait AppExtendManager: Sized {
     fn new() -> Self;

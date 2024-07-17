@@ -1,6 +1,6 @@
 use async_trait::async_trait;
 
-use crate::preinstalled::local_settings::PluginSettings;
+use crate::local_settings::PluginSettings;
 
 pub enum EventError {
     ErrorPublishingEvent,
