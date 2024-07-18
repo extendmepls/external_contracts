@@ -7,12 +7,12 @@ pub type OnChangedCallback = fn();
 #[derive(Debug)]
 #[allow(dead_code)]
 pub struct FileNode {
-    name: String,
-    path: PathBuf,
-    is_dir: bool,
-    size: u64,
-    data: Result<Option<Vec<u8>>, DataSourceError>,
-    children: Vec<FileNode>,
+    pub name: String,
+    pub path: PathBuf,
+    pub is_dir: bool,
+    pub size: u64,
+    pub data: Result<Option<Vec<u8>>, DataSourceError>,
+    pub children: Vec<FileNode>,
 }
 
 impl FileNode {
