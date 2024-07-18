@@ -47,7 +47,7 @@ pub enum DataSourceError {
 
 #[async_trait]
 pub trait DataSource {
-    fn watch(&self, on_changed: OnChangedCallback) -> Result<(), DataSourceError>;
+    //fn watch(&self, on_changed: OnChangedCallback) -> Result<(), DataSourceError>;
     //TODO: return a mut/immutable reference to the data, to not stote it on the back and front on the same time
     async fn open(&self, path: PathBuf) -> Result<FileNode, DataSourceError>;
 }
